@@ -5,5 +5,7 @@ services:
     volumes:
       - .:/usr/src/app:cached
       - yarn-cache:/usr/local/share/.cache/yarn/v4
+    ports:
+      - 3000:3000
 volumes:
   yarn-cache:
