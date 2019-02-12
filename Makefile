@@ -3,6 +3,7 @@ define USAGE
 ### Scripts to rule them all ###
 ################################
 	bootstrap - Fulfill project dependencies
+	ci - Run CI checks
 	console - Open node REPL
 	down - Stop the application
 	server - Start the application
@@ -34,6 +35,9 @@ export USAGE
 
 bootstrap: build
 	docker-compose run --rm app yarn install
+
+ci:
+	docker-compose run --rm app yarn ci
 
 console:
 	docker-compose run --rm app node --interactive

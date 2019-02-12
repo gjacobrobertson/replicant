@@ -1,0 +1,7 @@
+{
+  "editor.formatOnSave": true,
+  "tslint.enable": true,
+  "tslint.alwaysShowStatus": true,
+  "tslint.configFile": "tslint.json",
+  "tslint.packageManager": "yarn"
+}
