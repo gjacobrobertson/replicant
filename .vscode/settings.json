@@ -3,5 +3,6 @@
   "tslint.enable": true,
   "tslint.alwaysShowStatus": true,
   "tslint.configFile": "tslint.json",
-  "tslint.packageManager": "yarn"
+  "tslint.packageManager": "yarn",
+  "tslint.autoFixOnSave": true
 }
