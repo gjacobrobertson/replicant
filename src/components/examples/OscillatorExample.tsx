@@ -1,26 +1,28 @@
+import { observer } from 'mobx-react-lite';
 import React, { useEffect, useState } from 'react';
 import { RouteProps } from 'react-router';
-import ReactAudioConnection from '../audio/ReactAudioConnection';
-import ReactAudioContext from '../audio/ReactAudioContext';
-import ReactAudioNode from '../audio/ReactAudioNode';
+import AudioConnectionStore from '../../stores/AudioConnectionStore';
+import AudioContextStore from '../../stores/AudioContextStore';
+import AudioGraphStore from '../../stores/AudioGraphStore';
+import AudioNodeStore from '../../stores/AudioNodeStore';
 
 type Props = RouteProps;
 const OscillatorExample: React.ComponentType<Props> = (props: Props) => {
-  const [audioContext] = useState(() => new AudioContext());
-  const [oscillator] = useState(() => new OscillatorNode(audioContext));
-  oscillator.start();
+  const [ctx] = useState(() => {
+    const graph = new AudioGraphStore();
+    const node = new AudioNodeStore(OscillatorNode, { type: 'triangle' });
+    const link = new AudioConnectionStore(node, null);
+    graph.nodes.add(node);
+    graph.links.add(link);
+    return new AudioContextStore(graph);
+  });
+
+  useEffect(() => () => ctx.close());
   return (
     <div className="example example--oscillator">
       <h1>Oscillator</h1>
-      <ReactAudioContext.Provider value={audioContext}>
-        <ReactAudioNode node={oscillator} type="triangle" />
-        <ReactAudioConnection
-          source={oscillator}
-          destination={audioContext.destination}
-        />
-      </ReactAudioContext.Provider>
     </div>
   );
 };
 
-export default React.memo(OscillatorExample);
+export default observer(OscillatorExample);
