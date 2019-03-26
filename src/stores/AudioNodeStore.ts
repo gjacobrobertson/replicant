@@ -8,7 +8,6 @@ type AudioNodeConstructor<N extends AudioNode, O> = new (
 export default class AudioNodeStore<N extends AudioNode, O> {
   public ctor: AudioNodeConstructor<N, O>;
   public options: ObservableMap<string, any>;
-  @observable public active: boolean = true;
 
   constructor(ctor: AudioNodeConstructor<N, O>, options: O) {
     this.ctor = ctor;
