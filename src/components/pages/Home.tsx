@@ -4,7 +4,7 @@ import { Link, RouteProps } from 'react-router-dom';
 type Props = RouteProps;
 const Home: React.ComponentType<Props> = (props: Props) => (
   <div className="home">
-    <h1>Examples</h1>
+    <h2>Examples</h2>
     <ul>
       <li>
         <Link to="/examples/oscillator">Oscillator</Link>

@@ -1,0 +1,5 @@
+.main {
+  background-color: palegoldenrod;
+  display: flex;
+  flex-direction: column;
+}
