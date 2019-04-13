@@ -26,4 +26,5 @@
   grid-row-start: header;
   grid-row-end: bottom;
   overflow: scroll;
+  position: relative;
 }

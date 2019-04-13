@@ -9,7 +9,10 @@ const Content = () => {
     <Switch>
       <Route exact={true} path="/" component={Home} />
       <Route path="/examples/oscillator" component={OscillatorExample} />
-      <Route path="/design" component={DesignView} />
+      <Route
+        path="/design"
+        render={props => <DesignView key={props.location.pathname} />}
+      />
     </Switch>
   );
 };

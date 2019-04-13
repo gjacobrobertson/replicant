@@ -1,0 +1,11 @@
+.main {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  margin: 1em;
+  padding: 0;
+}
+
+.main li {
+  flex: 1;
+}
