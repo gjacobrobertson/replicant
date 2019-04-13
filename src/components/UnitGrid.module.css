@@ -1,8 +1,0 @@
-.main {
-  fill: url('#unitGrid');
-  cursor: move;
-}
-
-.path {
-  stroke: gray;
-}

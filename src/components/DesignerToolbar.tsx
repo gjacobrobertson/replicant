@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import { action } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import React, { useCallback } from 'react';
@@ -6,12 +7,15 @@ import styles from './DesignerToolbar.module.css';
 
 interface IProps {
   scaleStore: ScaleStore;
+  classes: {
+    main: string;
+  };
 }
 
 const scaleFactor = 1.2;
 
 const DesignerToolbar = (props: IProps) => {
-  const { scaleStore } = props;
+  const { scaleStore, classes } = props;
   const zoomIn = useCallback(
     action(() => {
       scaleStore.size /= scaleFactor;
@@ -26,7 +30,7 @@ const DesignerToolbar = (props: IProps) => {
     [scaleStore]
   );
   return (
-    <ul role="toolbar" className={styles.main}>
+    <ul role="toolbar" className={cn(styles.main, classes.main)}>
       <li>
         <button onClick={zoomIn}>+</button>
       </li>
