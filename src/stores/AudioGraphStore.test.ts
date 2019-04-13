@@ -1,5 +1,5 @@
-import AudioGraphStore from './AudioGraphStore';
 import AudioConnectionStore from './AudioConnectionStore';
+import AudioGraphStore from './AudioGraphStore';
 import AudioNodeStore from './AudioNodeStore';
 
 describe('AudioGraphStore', () => {

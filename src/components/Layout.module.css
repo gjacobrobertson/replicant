@@ -10,7 +10,6 @@
   grid-column-end: right;
   grid-row-start: top;
   grid-row-end: header;
-  height: 5rem;
 }
 
 .sidebar {
@@ -19,5 +18,12 @@
   grid-row-start: header;
   grid-row-end: bottom;
   overflow-y: scroll;
-  width: 10rem;
+}
+
+.content {
+  grid-column-start: sidebar;
+  grid-column-end: right;
+  grid-row-start: header;
+  grid-row-end: bottom;
+  overflow: scroll;
 }

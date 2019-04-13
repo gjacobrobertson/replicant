@@ -7,9 +7,15 @@ import Sidebar from './Sidebar';
 const Layout = () => {
   return (
     <main className={styles.main}>
-      <Header />
-      <Sidebar />
-      <Content />
+      <header className={styles.header}>
+        <Header />
+      </header>
+      <aside className={styles.sidebar}>
+        <Sidebar />
+      </aside>
+      <article className={styles.content}>
+        <Content />
+      </article>
     </main>
   );
 };

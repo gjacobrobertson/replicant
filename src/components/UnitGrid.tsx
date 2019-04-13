@@ -1,59 +1,64 @@
-import classNames from 'classnames';
 import { observer } from 'mobx-react-lite';
 import React, { useCallback } from 'react';
 import PanStore from '../stores/PanStore';
+import IPoint from '../types/IPoint';
 import screenToSVG from '../util/screenToSVG';
-import grid from './UnitGridDef.module.css';
 import styles from './UnitGrid.module.css';
 
 interface IProps {
-  store: PanStore;
+  panStore: PanStore;
   size: number;
 }
+
+const mousePointHandler = (cb: (point: IPoint) => void) => (
+  evt: React.MouseEvent<SVGElement>
+) => {
+  evt.preventDefault();
+  evt.stopPropagation();
+  const svg = evt.currentTarget.ownerSVGElement;
+  if (!svg) {
+    throw new Error("Couldn't get owner SVG");
+  }
+  const point = screenToSVG(svg, evt.clientX, evt.clientY);
+  return cb(point);
+};
+
+const touchPointHandler = (cb: (point: IPoint) => void) => (
+  evt: React.TouchEvent<SVGElement>
+) => {
+  evt.preventDefault();
+  evt.stopPropagation();
+  const svg = evt.currentTarget.ownerSVGElement;
+  if (!svg) {
+    throw new Error("Couldn't get owner SVG");
+  }
+};
+
 const UnitGrid = (props: IProps) => {
-  const { store } = props;
+  const { panStore } = props;
 
-  const onMouseMove = useCallback(
-    (evt: React.MouseEvent<SVGElement>) => {
-      evt.preventDefault();
-      evt.stopPropagation();
-      const svg = evt.currentTarget.ownerSVGElement;
-      if (!svg) {
-        throw new Error("Couldn't get owner SVG");
-      }
-      const point = screenToSVG(svg, evt.clientX, evt.clientY);
-      store.pan(point);
-    },
-    [store]
-  );
+  const onPan = useCallback(mousePointHandler(point => panStore.pan(point)), [
+    panStore
+  ]);
 
-  const onMouseDown = useCallback(
-    (evt: React.MouseEvent<SVGElement>) => {
-      evt.preventDefault();
-      evt.stopPropagation();
-      const svg = evt.currentTarget.ownerSVGElement;
-      if (!svg) {
-        throw new Error("Couldn't get owner SVG");
-      }
-      const point = screenToSVG(svg, evt.clientX, evt.clientY);
-      store.panStart(point);
-    },
-    [store]
+  const onPanStart = useCallback(
+    mousePointHandler(point => panStore.panStart(point)),
+    [panStore]
   );
 
   const onPanEnd = useCallback(() => {
-    store.panEnd();
-  }, [store]);
+    panStore.panEnd();
+  }, [panStore]);
 
   return (
     <rect
-      x={Math.floor(store.x)}
-      y={Math.floor(store.y)}
+      x={Math.floor(panStore.x)}
+      y={Math.floor(panStore.y)}
       width={props.size + 1}
       height={props.size + 1}
-      className={classNames(grid.main, styles.main)}
-      onMouseDown={onMouseDown}
-      onMouseMove={onMouseMove}
+      className={styles.main}
+      onMouseDown={onPanStart}
+      onMouseMove={onPan}
       onMouseUp={onPanEnd}
       onMouseLeave={onPanEnd}
     />

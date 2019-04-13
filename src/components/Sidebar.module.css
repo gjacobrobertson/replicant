@@ -1,5 +1,5 @@
-.main {
-  background-color: palegoldenrod;
-  display: flex;
-  flex-direction: column;
+.overflow {
+  height: 200vh;
+  background-color: goldenrod;
+  width: 5em;
 }
