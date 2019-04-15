@@ -9,7 +9,11 @@ const DesignView = () => {
   const [store] = useState(() => new DesignViewStore());
   return (
     <React.Fragment>
-      <Designer panStore={store.pan} scaleStore={store.scale} />
+      <Designer
+        panStore={store.pan}
+        scaleStore={store.scale}
+        classes={{ main: styles.designer }}
+      />
       <DesignerToolbar
         scaleStore={store.scale}
         classes={{ main: styles.toolbar }}

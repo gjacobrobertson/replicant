@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import { observer } from 'mobx-react-lite';
 import React, { useCallback } from 'react';
 import PanStore from '../stores/PanStore';
@@ -9,6 +10,9 @@ import styles from './Designer.module.css';
 interface IProps {
   panStore: PanStore;
   scaleStore: ScaleStore;
+  classes: {
+    main: string;
+  };
 }
 
 const mousePointHandler = (cb: (point: IPoint) => void) => (
@@ -22,7 +26,7 @@ const mousePointHandler = (cb: (point: IPoint) => void) => (
 };
 
 const Designer = (props: IProps) => {
-  const { scaleStore, panStore } = props;
+  const { scaleStore, panStore, classes } = props;
   const { x, y } = panStore;
   const { size } = scaleStore;
 
@@ -41,7 +45,7 @@ const Designer = (props: IProps) => {
 
   return (
     <svg
-      className={styles.main}
+      className={cn(styles.main, classes.main)}
       viewBox={`${x} ${y} ${size} ${size}`}
       preserveAspectRatio="xMidYMid slice"
       onMouseDown={onPanStart}
