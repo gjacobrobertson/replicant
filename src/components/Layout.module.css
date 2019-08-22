@@ -10,6 +10,7 @@
   grid-column-end: right;
   grid-row-start: top;
   grid-row-end: header;
+  border-bottom: 1px solid gray;
 }
 
 .sidebar {
@@ -18,6 +19,7 @@
   grid-row-start: header;
   grid-row-end: bottom;
   overflow-y: scroll;
+  border-right: 1px solid gray;
 }
 
 .content {

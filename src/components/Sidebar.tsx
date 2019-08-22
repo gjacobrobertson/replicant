@@ -1,8 +1,12 @@
 import React from 'react';
-import styles from './Sidebar.module.css';
-
+import { Route, Switch } from 'react-router-dom';
+import Toolbox from './Toolbox';
 const Sidebar = () => {
-  return <div className={styles.overflow} />;
+  return (
+    <Switch>
+      <Route path="/design" component={Toolbox} />} />
+    </Switch>
+  );
 };
 
 export default Sidebar;
